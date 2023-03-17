@@ -29,10 +29,10 @@ function validateInput(testInput) {
 }
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-    let pilotName = document.getElementByName("pilotName");
-    let copilotName = document.getElementsByName("copilotName");
+    //let pilotName = document.getElementByName("pilotName");
+    //let copilotName = document.getElementsByName("copilotName");
     //let fuelLevel = document.getElementsByName("fuelLevel");
-    let cargoMass = document.getElementsByName("cargoMass");
+    //let cargoMass = document.getElementsByName("cargoMass");
     let pilotStatus = document.getElementById("pilotStatus");
     let copilotStatus = document.getElementById("copilotStatus");
     let fuelStatus = document.getElementById("fuelStatus");
@@ -40,41 +40,39 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     let launchStatus = document.getElementById("launchStatus");
     let faultyItems = document.getElementById("faultyItems");
     
-    // let inputs = document.querySelectorAll("inputs");   Use Index[]
+    // let inputs = document.querySelectorAll("inputs");   Use Index[]  ** Example alternative **
     faultyItems.style.visibility = "visible";
     launchStatus.style.visibility = "visible";
-    // if (validateInput(pilotName.value === "Not a Number") &&
-    //     validateInput(copilotName.value === "Not a Number") &&
-    //     validateInput(fuelLevel.value === "Is a Number") &&
-    //     validateInput(cargoMass.value === "Is a Number")) {
-            //launchStatus.visible = true;
-            pilotStatus.innerText = 'Pilot ${pilotName} Ready';
-            copilotStatus.innerText = 'Co-pilot ${copilotName} Ready';
+
+    if (validateInput(pilot.value === "Not a Number") &&
+        validateInput(copilot.value === "Not a Number") &&
+        validateInput(fuelLevel.value === "Is a Number") &&
+        validateInput(cargoLevel.value === "Is a Number")) {
+
+            pilotStatus.innerText = `Pilot ${pilot} Ready`;
+            copilotStatus.innerText = `Co-pilot ${copilot} Ready`;
+// Validate Fuel Level
             if (fuelLevel.value < 10000) {
-                //faultyItems.visible = true;
                 fuelStatus.innerText = "There is not enough fuel for the journey.";
                 launchStatus.innerText = "Shuttle not ready for launch";
                 launchStatus.color = "red";
             } else {
                 fuelStatus.innerText = "Fuel level high enough for launch";
                 }
-            if (cargoMass.value > 10000) {
-                //faultyItems.visible = true;
+// Validate Cargo Mass
+            if (cargoLevel.value > 10000) {
                 cargoStatus.innerText = "There is too much mass for the shuttle to take off.";
                 launchStatus.innerText = "Shuttle not ready for launch";
                 launchStatus.color = "red";
             } else {
                 cargoStatus.innerText = "Cargo mass low enough for launch";
                 }
-            if (fuelLevel.value >= 10000 && cargoMass.value <= 10000)
+// Set "Ready" text if passed validation
+            if (fuelLevel.value >= 10000 && cargoLevel.value <= 10000)
                 launchStatus.innerText = "Shuttle is ready for launch";
                 launchStatus.color = "green";
-    // }
+    }
 
-    // empty
-    // type "NaN"
-    // DOM 
-   // return alert('message');
 }
 
 async function myFetch() {
