@@ -1,5 +1,6 @@
 // Write your JavaScript code here!
 
+// comment out the next line until finished.
 // const { validateInput, formSubmission } = require("./scriptHelper");
 
     //add event listener for initial Load
@@ -14,7 +15,15 @@
             let cargoLevel = document.querySelector("input[name=cargoMass]");
             let list = document.getElementById("faultyItems");
 
-            if (validateInput(pilot.value) === "Not a Number" &&
+        if (validateInput(pilot.value) !== "Not a Number" ||
+            validateInput(copilot.value) !== "Not a Number") {
+            alert("Pilot & CoPilot must be Alphacharacter values.");
+        }
+        if (validateInput(fuelLevel.value) !== "Is a Number" ||
+            validateInput(cargoLevel.value) !== "Is a Number") {
+                alert("Fuel & Cargo must be Numeric values.");
+        }
+        if (validateInput(pilot.value) === "Not a Number" &&
                 validateInput(copilot.value) === "Not a Number" &&
                 validateInput(fuelLevel.value) === "Is a Number" &&
                 validateInput(cargoLevel.value) === "Is a Number") {
@@ -29,17 +38,18 @@
     listedPlanetsResponse.then(function (result) {
         listedPlanets = result;
     }).then(function () {
+        let x = randomPlanet(listedPlanets);
         addDestinationInfo(document, 
-            listedPlanets[3].name, 
-            listedPlanets[3].diameter, 
-            listedPlanets[3].star, 
-            listedPlanets[3].distance, 
-            listedPlanets[3].moons, 
-            listedPlanets[3].image
+            listedPlanets[x].name, 
+            listedPlanets[x].diameter, 
+            listedPlanets[x].star, 
+            listedPlanets[x].distance, 
+            listedPlanets[x].moons, 
+            listedPlanets[x].image
             );
         return(listedPlanets);
         // Below this comment call the appropriate helper functions to pick a planet from the list of planets and add that information to your destination.
-    });
+    }); 
 
     function randomPlanet(arr) {
         return Math.floor(Math.random() * arr.length);
