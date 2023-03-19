@@ -1,5 +1,5 @@
 // Write your helper functions here!
-//require('isomorphic-fetch');
+require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
    // Here is the HTML formatting for our mission target div.
@@ -17,11 +17,10 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                         <li>Distance from Earth: ${distance}</li>
                         <li>Number of Moons: ${moons}</li>
                     </ol>
-                    <img src=${image.value}>
+                    <img src=${imageUrl} alt="Picture of ${name}">
                 `;
             });
         });
-    
 }
 
 function validateInput(testInput) {
@@ -32,7 +31,6 @@ function validateInput(testInput) {
    } else {
     return "Is a Number";
    }
-
 }
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
@@ -43,13 +41,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     let fuelStatus = document.getElementById("fuelStatus");
     let cargoStatus = document.getElementById("cargoStatus");
     
-    // let inputs = document.querySelectorAll("inputs");   Use Index[]  ** Example alternative **
     launchStatus.innerText = "Testing Testing Testing";
     faultyItems.style.visibility = "visible";
-    launchStatus.setAttribute(visibility,"visible");
-
-    alert(`pilot: ${pilot.value} copilot: ${copilot.value}`);
-    alert(`fuel: ${fuelLevel.value} cargo: ${cargoLevel.value}`);
 
     pilotStatus.innerText = (`Pilot ${pilot.value} Ready`);
     copilotStatus.innerText = (`Co-pilot ${copilot.value} Ready`);
@@ -58,7 +51,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     if (fuelLevel.value < 10000) {
         fuelStatus.innerText = "There is not enough fuel for the journey.";
         launchStatus.innerText = "Shuttle not ready for launch";
-        launchStatus.color = "red";
+        launchStatus.style.color = "red";
     } else {
         fuelStatus.innerText = "Fuel level high enough for launch";
         }
@@ -66,14 +59,14 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     if (cargoLevel.value > 10000) {
         cargoStatus.innerText = "There is too much mass for the shuttle to take off.";
         launchStatus.innerText = "Shuttle not ready for launch";
-        launchStatus.color = "red";
+        launchStatus.style.color = "red";
     } else {
         cargoStatus.innerText = "Cargo mass low enough for launch";
         }
 // Set "Ready" text if passed validation
     if (fuelLevel.value >= 10000 && cargoLevel.value <= 10000) {
         launchStatus.innerText = "Shuttle is ready for launch";
-        launchStatus.color = "green";
+        launchStatus.style.color = "green";
     }
 };
 
